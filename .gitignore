@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# Other
+*.json
+
 # Filenames
 main
 

@@ -13,11 +13,13 @@ void handleInput(){
     printf("The command you entered is : %s", userInput);
     if(isLegit(userInput)){
         printf("Legit!\n");
+    }else{
+        printf("Undefined command. Please try again.\n");
     }
 
 }
 
 int isLegit(char *userInput){
     printf("Successfully entered function\n");
-    return 1;
+    return 0;
 }

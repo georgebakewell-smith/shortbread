@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "input.h"
+#include "../include/input.h"
 
 int main(){
 
@@ -18,4 +18,3 @@ int main(){
 
 return 0;
 }
-

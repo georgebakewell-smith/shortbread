@@ -1,7 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void helloWorld(){
-    
-    printf("I think this document has been linked successfully!\n");
+int isLegit(char *userInput);
+
+
+void handleInput(){
+
+    size_t inpLen = 60;
+    char *userInput = (char*)malloc(inpLen*sizeof(char));
+
+    fgets(userInput, inpLen, stdin);
+    printf("The command you entered is : %s", userInput);
+    if(isLegit(userInput)){
+        printf("Legit!\n");
+    }
+
+}
+
+int isLegit(char *userInput){
+    printf("Successfully entered function\n");
+    return 1;
 }

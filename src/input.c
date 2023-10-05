@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../include/tools.h"
 
 int isLegit(char *userInput);
 void scanInput(char *userInput);
@@ -9,9 +10,14 @@ void scanInput(char *userInput);
 void handleInput(){
 
     size_t inpLen = 60;
+    
     char *userInput = (char*)malloc(inpLen*sizeof(char));
 
     fgets(userInput, inpLen, stdin);
+    
+    newLineRemove(userInput);
+
+
     printf("The command you entered is : %s", userInput);
     if(isLegit(userInput)){
         printf("Legit!\n");

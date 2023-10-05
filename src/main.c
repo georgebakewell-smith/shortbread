@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/input.h"
+#include "../include/tools.h"
 
 int main(){
 
@@ -10,6 +11,7 @@ int main(){
     printf("\nWelcome to Shortbread, your new directory cleanup tool!\n\n");
     printf("Please enter your target directory:\n");
     fgets(filePath, filePathLength, stdin);
+    newLineRemove(filePath);
     printf("%s", filePath);
 
     

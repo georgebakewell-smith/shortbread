@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../include/tools.h"
-//#include "../include/leg_inp.h"
 #include "../include/input.h"
 
 int isLegit(char *userInput, leginp *pLegInp);

@@ -1,6 +1,5 @@
 #ifndef INPUT_H
 #define INPUT_H
-//#include "../include/leg_inp.h"
 
 typedef struct {
     size_t numTokens;

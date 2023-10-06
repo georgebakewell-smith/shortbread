@@ -1,6 +1,13 @@
-#ifndef __INPUT_H
-#define __INPUT_H
+#ifndef INPUT_H
+#define INPUT_H
+//#include "../include/leg_inp.h"
 
-void handleInput();
+typedef struct {
+    size_t numTokens;
+    char command[20];
+    char target[20];
+}leginp;
+
+void handleInput(leginp *pLegInp, char *filePath);
 
 #endif

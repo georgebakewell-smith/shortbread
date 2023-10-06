@@ -1,6 +1,11 @@
-#ifndef __TOOLS_H
-#define __TOOLS_H
+#ifndef TOOLS_H
+#define TOOLS_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 void newLineRemove();
+void cmdprint(char *myStr);
 
 #endif

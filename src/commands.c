@@ -5,7 +5,6 @@
 #include "../include/tools.h"
 #include "../include/commands.h"
 
-
 void listfiles(const char *dirname){
     //Opens directory
     DIR *dir = opendir(dirname);
@@ -16,9 +15,11 @@ void listfiles(const char *dirname){
 struct dirent *entity;
 entity = readdir(dir);
 //Cycles through contents
+printf("\n");
 while(entity != NULL){
     if(entity->d_type == DT_REG){
-        printf("%hhd %s\n", entity->d_type, entity->d_name);   
+        printf("%s", entity->d_name);printf("\n");
+        
     }
     //Calls listfiles() within itself to recursively access folders within
     if(entity->d_type == DT_DIR && strcmp(entity->d_name, ".")!=0 && strcmp(entity->d_name, "..")!=0){
@@ -31,6 +32,5 @@ while(entity != NULL){
     
     entity = readdir(dir);
 }
-
     closedir(dir);
 }

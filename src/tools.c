@@ -10,5 +10,5 @@ void newLineRemove(char *myStr){
 }
 
 void cmdprint(char *myStr){
-    printf("\n%s", myStr);
+    printf("\n%s$", myStr);
 }

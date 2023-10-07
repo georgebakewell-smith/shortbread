@@ -28,9 +28,13 @@ while(entity != NULL){
         strcat(path, "/");
         strcat(path, entity->d_name);
         listfiles(path);
-    }
-    
+    }   
     entity = readdir(dir);
 }
     closedir(dir);
+}
+
+
+void delhandle(const char *filePath, const char *target){
+    printf("You have tried to delete something. I hope it wasn't too important!\n");
 }

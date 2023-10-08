@@ -3,6 +3,6 @@
 
 void listfiles(const char *dirname);
 void delfile(const char *filePath, const char *file);
-void copyfile(const char *filePath);
+void copyfile(const char *filePath, const char *file);
 
 #endif

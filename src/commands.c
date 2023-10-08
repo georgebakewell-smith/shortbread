@@ -35,14 +35,26 @@ while(entity != NULL){
 }
 
 
-void copyfile(const char *filePath){
+void copyfile(const char *filePath, const char *file){
     unsigned char buffer[1024];
     size_t bytesRead;
     FILE *sourceFile, *destFile;
-    sourceFile = fopen("testfile.txt", "rb");
-    destFile = fopen("copy.txt", "wb");
+    //Create full filepath with filePath and target file
+    //Should probably create function for this and add to tools
+    char pathSource[100], pathDest[100];
+    strcpy(pathSource, filePath);
+    strcat(pathSource, "/");
+    strcat(pathSource, file);
+    strcpy(pathDest, "/home/george/Documents/cprojects/copiedfiles");
+    strcat(pathDest, "/");
+    strcat(pathDest, file);
+    printf("\n\n%s\n%s\n", pathSource, pathDest);
+    
+    sourceFile = fopen(pathSource, "rb");
+    destFile = fopen(pathDest, "wb");
     if(sourceFile == NULL || destFile ==NULL){
-            printf("Error opening fiels\n");
+            printf("Error opening files\n");
+            
     }
    
     while((bytesRead = fread(buffer, 1, sizeof(buffer), sourceFile)) > 0){

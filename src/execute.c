@@ -11,7 +11,7 @@ void excommand(leginp *pLegInp, char *filePath){
     }else if(strcmp(pLegInp->command,"delete")==0){
         delfile(filePath, pLegInp->target);
     }else if(strcmp(pLegInp->command,"copy")==0){
-        copyfile(filePath);
+        copyfile(filePath, pLegInp->target);
     }
     //elseif for additional commands
 }

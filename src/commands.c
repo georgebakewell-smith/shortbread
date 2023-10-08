@@ -34,7 +34,29 @@ while(entity != NULL){
     closedir(dir);
 }
 
+void delfile(const char *filePath, const char *file){//Maybe move this to tools
+    char path[60]; //Create a string to form the concatanated string with the filename
+    char pathTest[60];
+    int status;
 
-void delhandle(const char *filePath, const char *target){
-    printf("You have tried to delete something. I hope it wasn't too important!\n");
+    FILE *fptr;
+    // Create the file for testing so don't have to add deleted file each time
+    strcpy(pathTest, filePath);
+    strcat(pathTest, "/");
+    strcat(pathTest, file);
+    fptr = fopen(pathTest, "w");
+    // Close the file
+    fclose(fptr);
+
+    strcpy(path, filePath);
+    strcat(path, "/");
+    strcat(path, file);
+    status = remove(path);
+
+    if(status == 0){
+        printf("Success: file deleted\n");
+    }else{
+        printf("Error: file not deleted\n");
+        printf("%s", path);
+    }
 }

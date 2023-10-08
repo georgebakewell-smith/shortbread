@@ -2,6 +2,6 @@
 #define COMMANDS_H
 
 void listfiles(const char *dirname);
-void delhandle(const char *filePath, const char *target);
+void delfile(const char *filePath, const char *file);
 
 #endif

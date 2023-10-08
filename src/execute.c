@@ -9,6 +9,6 @@ void excommand(leginp *pLegInp, char *filePath){
     if(strcmp(pLegInp->command,"list")==0){
         listfiles(filePath);
     }else if(pLegInp->command,"list"){
-        delhandle(filePath, pLegInp->target);
+        delfile(filePath, pLegInp->target);
     }//elseif for additional commands
 }

@@ -34,6 +34,25 @@ while(entity != NULL){
     closedir(dir);
 }
 
+
+void copyfile(const char *filePath){
+    unsigned char buffer[1024];
+    size_t bytesRead;
+    FILE *sourceFile, *destFile;
+    sourceFile = fopen("testfile.txt", "rb");
+    destFile = fopen("copy.txt", "wb");
+    if(sourceFile == NULL || destFile ==NULL){
+            printf("Error opening fiels\n");
+    }
+   
+    while((bytesRead = fread(buffer, 1, sizeof(buffer), sourceFile)) > 0){
+        fwrite(buffer, 1, bytesRead, destFile);
+    }
+
+    fclose(sourceFile);
+    fclose(destFile);
+}
+
 void delfile(const char *filePath, const char *file){//Maybe move this to tools
     char path[60]; //Create a string to form the concatanated string with the filename
     char pathTest[60];

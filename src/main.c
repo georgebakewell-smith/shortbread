@@ -10,7 +10,7 @@ int main(){
     const unsigned int filePathLength = 60;
     char *filePath = (char*)malloc(filePathLength*sizeof(char));
     bool exit = false;
-    leginp *pLegInp = (leginp*)malloc(sizeof(leginp));
+    
     
     printf("\nWelcome to Shortbread, your new directory cleanup tool!\n\n");
     printf("Please enter your target directory:\n");
@@ -19,16 +19,19 @@ int main(){
     newLineRemove(filePath);
     cmdprint(filePath);
     while(exit!=true){
+        leginp *pLegInp = (leginp*)malloc(sizeof(leginp));
         handleInput(pLegInp, filePath);
         if(strcmp(pLegInp->command, "exit") == 0){
+            free(pLegInp);
             break;
         }
         excommand(pLegInp, filePath);
         cmdprint(filePath);
+        free(pLegInp);
     }
     
 
-    free(pLegInp);
+    
     free(filePath);
     
 return 0;

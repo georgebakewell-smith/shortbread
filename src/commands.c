@@ -34,6 +34,37 @@ while(entity != NULL){
     closedir(dir);
 }
 
+
+void copyfile(const char *filePath, const char *file){
+    unsigned char buffer[1024];
+    size_t bytesRead;
+    FILE *sourceFile, *destFile;
+    //Create full filepath with filePath and target file
+    //Should probably create function for this and add to tools
+    char pathSource[100], pathDest[100];
+    strcpy(pathSource, filePath);
+    strcat(pathSource, "/");
+    strcat(pathSource, file);
+    strcpy(pathDest, "/home/george/Documents/cprojects/copiedfiles");
+    strcat(pathDest, "/");
+    strcat(pathDest, file);
+    printf("\n\n%s\n%s\n", pathSource, pathDest);
+    
+    sourceFile = fopen(pathSource, "rb");
+    destFile = fopen(pathDest, "wb");
+    if(sourceFile == NULL || destFile ==NULL){
+            printf("Error opening files\n");
+            
+    }
+   
+    while((bytesRead = fread(buffer, 1, sizeof(buffer), sourceFile)) > 0){
+        fwrite(buffer, 1, bytesRead, destFile);
+    }
+
+    fclose(sourceFile);
+    fclose(destFile);
+}
+
 void delfile(const char *filePath, const char *file){//Maybe move this to tools
     char path[60]; //Create a string to form the concatanated string with the filename
     char pathTest[60];

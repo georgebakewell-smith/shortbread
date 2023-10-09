@@ -8,7 +8,10 @@ void excommand(leginp *pLegInp, char *filePath){
     
     if(strcmp(pLegInp->command,"list")==0){
         listfiles(filePath);
-    }else if(pLegInp->command,"list"){
+    }else if(strcmp(pLegInp->command,"delete")==0){
         delfile(filePath, pLegInp->target);
-    }//elseif for additional commands
+    }else if(strcmp(pLegInp->command,"copy")==0){
+        copyfile(filePath, pLegInp->target);
+    }
+    //elseif for additional commands
 }

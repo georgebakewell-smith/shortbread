@@ -48,7 +48,6 @@ void copyfile(const char *filePath, const char *file){
     strcpy(pathDest, "/home/george/Documents/cprojects/copiedfiles");
     strcat(pathDest, "/");
     strcat(pathDest, file);
-    printf("\n\n%s\n%s\n", pathSource, pathDest);
     
     sourceFile = fopen(pathSource, "rb");
     destFile = fopen(pathDest, "wb");

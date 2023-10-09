@@ -50,33 +50,30 @@ void copyfile(const char *filePath, const char *file){
     strcat(pathDest, file);
     
     sourceFile = fopen(pathSource, "rb");
-    destFile = fopen(pathDest, "wb");
-    if(sourceFile == NULL || destFile ==NULL){
-            printf("Error opening files\n");
-            
+    
+        if(sourceFile == NULL){
+                printf("Error opening source file\n");
+                
+        }else{
+            destFile = fopen(pathDest, "wb");
+        
+        if(destFile ==NULL){
+            printf("Error opening destination file");
+        }else{
+    
+            while((bytesRead = fread(buffer, 1, sizeof(buffer), sourceFile)) > 0){
+                fwrite(buffer, 1, bytesRead, destFile);
+            }
+            fclose(sourceFile);
+            fclose(destFile);
+        }
     }
-   
-    while((bytesRead = fread(buffer, 1, sizeof(buffer), sourceFile)) > 0){
-        fwrite(buffer, 1, bytesRead, destFile);
-    }
-
-    fclose(sourceFile);
-    fclose(destFile);
 }
 
 void delfile(const char *filePath, const char *file){//Maybe move this to tools
     char path[60]; //Create a string to form the concatanated string with the filename
     char pathTest[60];
     int status;
-
-    FILE *fptr;
-    // Create the file for testing so don't have to add deleted file each time
-    strcpy(pathTest, filePath);
-    strcat(pathTest, "/");
-    strcat(pathTest, file);
-    fptr = fopen(pathTest, "w");
-    // Close the file
-    fclose(fptr);
 
     strcpy(path, filePath);
     strcat(path, "/");

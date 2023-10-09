@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "../include/input.h"
 #include "../include/tools.h"
 #include "../include/execute.h"
@@ -7,7 +8,8 @@
 int main(){
 
     const unsigned int filePathLength = 60;
-    char *filePath = (char*)malloc(filePathLength*sizeof(char));  
+    char *filePath = (char*)malloc(filePathLength*sizeof(char));
+    bool exit = false;
     leginp *pLegInp = (leginp*)malloc(sizeof(leginp));
     
     printf("\nWelcome to Shortbread, your new directory cleanup tool!\n\n");
@@ -16,9 +18,15 @@ int main(){
     strcpy(filePath, "/home/george/Documents/cprojects/shortbreadtestfiles/");
     newLineRemove(filePath);
     cmdprint(filePath);
-        
-    handleInput(pLegInp, filePath);
-    excommand(pLegInp, filePath);
+    while(exit!=true){
+        handleInput(pLegInp, filePath);
+        if(strcmp(pLegInp->command, "exit") == 0){
+            break;
+        }
+        excommand(pLegInp, filePath);
+        cmdprint(filePath);
+    }
+    
 
     free(pLegInp);
     free(filePath);

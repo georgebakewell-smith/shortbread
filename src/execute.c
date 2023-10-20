@@ -12,6 +12,8 @@ void excommand(leginp *pLegInp, char *filePath){
         delfile(filePath, pLegInp->target);
     }else if(strcmp(pLegInp->command,"copy")==0){
         copyfile(filePath, pLegInp->target);
+    }else if(strcmp(pLegInp->command,"autorun")==0){
+        autorun(filePath);
     }else{
         printf("Please enter a valid command");
     }

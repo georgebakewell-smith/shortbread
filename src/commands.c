@@ -35,5 +35,17 @@ while(entity != NULL){
 }
 
 void autorun(const char *filePath){
-    printf("You chose autorun\n");
+
+    FILE *ruleFile;
+    char rule[100];
+    // Open a file in read mode
+    ruleFile = fopen("rules.txt", "r");
+    if(ruleFile == NULL) {
+        printf("Not able to open the file.");
+    }
+    readLine(rule, ruleFile);
+    printf("%s", rule);
+    
+    fclose(ruleFile);
+
 }

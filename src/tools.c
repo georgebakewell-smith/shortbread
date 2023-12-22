@@ -3,6 +3,13 @@
 #include <string.h>
 #include "../include/tools.h"
 
+void readLine(char *rule, FILE *ruleFile){
+    char line[100];
+    while(fgets(line, 100, ruleFile)) {
+        strcpy(rule, line);
+    }
+}
+
 void newLineRemove(char *myStr){
     size_t inpLen;
     inpLen = strlen(myStr);

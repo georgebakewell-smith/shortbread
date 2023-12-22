@@ -3,11 +3,18 @@
 #include <string.h>
 #include "../include/tools.h"
 
-void readLine(char *rule, FILE *ruleFile){
+
+size_t readLine(char *rule, FILE *ruleFile){
     char line[100];
-    while(fgets(line, 100, ruleFile)) {
+    if(fgets(line, 100, ruleFile) != NULL){
         strcpy(rule, line);
-    }
+        newLineRemove(rule);
+        return 0;
+    }   else{
+        strcpy(rule, line);
+        newLineRemove(rule);
+        return 1;
+    }    
 }
 
 void newLineRemove(char *myStr){

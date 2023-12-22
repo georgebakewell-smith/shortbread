@@ -8,5 +8,6 @@ typedef struct {
 }leginp;
 
 void handleInput(leginp *pLegInp, char *filePath);
+int isLegit(char *userInput, leginp *pLegInp);
 
 #endif

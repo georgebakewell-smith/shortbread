@@ -4,7 +4,7 @@
 #include "../include/tools.h"
 #include "../include/input.h"
 
-int isLegit(char *userInput, leginp *pLegInp);
+
 
 void handleInput(leginp *pLegInp, char *filePath){
 

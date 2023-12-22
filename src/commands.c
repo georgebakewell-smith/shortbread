@@ -4,6 +4,7 @@
 #include "../include/input.h"
 #include "../include/tools.h"
 #include "../include/commands.h"
+#include "../include/execute.h"
 
 void listfiles(const char *dirname){
     //Opens directory
@@ -38,14 +39,21 @@ void autorun(const char *filePath){
 
     FILE *ruleFile;
     char rule[100];
+    size_t nlineCount = 0;
+    leginp *pRuleCom = (leginp*)malloc(sizeof(leginp));
+
     // Open a file in read mode
     ruleFile = fopen("rules.txt", "r");
     if(ruleFile == NULL) {
-        printf("Not able to open the file.");
+        printf("Not able to open the file.\n");
     }
-    readLine(rule, ruleFile);
-    printf("%s", rule);
-    
-    fclose(ruleFile);
 
+    while(readLine(rule, ruleFile) == 0){
+    if(isLegit(rule, pRuleCom) != 1){
+            printf("Undefined command. Please try again.\n");           
+        }
+    excommand(pRuleCom, filePath);
+    }
+    fclose(ruleFile);
+    free(pRuleCom);
 }

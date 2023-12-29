@@ -63,7 +63,7 @@ void copyfile(const char *filePath, const char *file){
 }
 
 void delfile(const char *filePath, const char *file){//Maybe move this to tools
-    char path[60]; //Create a string to form the concatanated string with the filename
+    char path[100]; //Create a string to form the concatanated string with the filename
     char pathTest[60];
     int status;
 
@@ -78,4 +78,5 @@ void delfile(const char *filePath, const char *file){//Maybe move this to tools
         printf("Error: file not deleted\n");
         printf("%s", path);
     }
+    
 }

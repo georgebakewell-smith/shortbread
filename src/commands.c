@@ -46,6 +46,8 @@ void autorun(const char *filePath){
     ruleFile = fopen("rules.txt", "r");
     if(ruleFile == NULL) {
         printf("Not able to open the file.\n");
+    } else{
+        printf("Successfully opened rules.txt.\n");
     }
 
     while(readLine(rule, ruleFile) == 0){
@@ -53,6 +55,7 @@ void autorun(const char *filePath){
             printf("Undefined command. Please try again.\n");           
         }
     excommand(pRuleCom, filePath);
+    
     }
     fclose(ruleFile);
     free(pRuleCom);

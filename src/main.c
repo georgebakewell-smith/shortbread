@@ -7,7 +7,7 @@
 
 int main(){
 
-    const unsigned int filePathLength = 60;
+    const unsigned int filePathLength = 100;
     char *filePath = (char*)malloc(filePathLength*sizeof(char));
     bool exit = false;
     
@@ -28,6 +28,7 @@ int main(){
         excommand(pLegInp, filePath);
         cmdprint(filePath);
         free(pLegInp);
+        
     }
     
 

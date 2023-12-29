@@ -3,6 +3,20 @@
 #include <string.h>
 #include "../include/tools.h"
 
+
+size_t readLine(char *rule, FILE *ruleFile){
+    char line[100];
+    if(fgets(line, 100, ruleFile) != NULL){
+        strcpy(rule, line);
+        newLineRemove(rule);
+        return 0;
+    }   else{
+        strcpy(rule, line);
+        newLineRemove(rule);
+        return 1;
+    }    
+}
+
 void newLineRemove(char *myStr){
     size_t inpLen;
     inpLen = strlen(myStr);
@@ -11,4 +25,58 @@ void newLineRemove(char *myStr){
 
 void cmdprint(char *myStr){
     printf("\n%s$", myStr);
+}
+
+void copyfile(const char *filePath, const char *file){
+    unsigned char buffer[1024];
+    size_t bytesRead;
+    FILE *sourceFile, *destFile;
+    //Create full filepath with filePath and target file
+    //Should probably create function for this and add to tools
+    char pathSource[100], pathDest[100];
+    strcpy(pathSource, filePath);
+    strcat(pathSource, "/");
+    strcat(pathSource, file);
+    strcpy(pathDest, "/home/george/Documents/cprojects/copiedfiles");
+    strcat(pathDest, "/");
+    strcat(pathDest, file);
+    
+    sourceFile = fopen(pathSource, "rb");
+    
+        if(sourceFile == NULL){
+                printf("Error opening source file\n");
+                
+        }else{
+            destFile = fopen(pathDest, "wb");
+        
+        if(destFile ==NULL){
+            printf("Error opening destination file");
+        }else{
+    
+            while((bytesRead = fread(buffer, 1, sizeof(buffer), sourceFile)) > 0){
+                fwrite(buffer, 1, bytesRead, destFile);
+            }
+            fclose(sourceFile);
+            fclose(destFile);
+        }
+    }
+}
+
+void delfile(const char *filePath, const char *file){//Maybe move this to tools
+    char path[100]; //Create a string to form the concatanated string with the filename
+    char pathTest[60];
+    int status;
+
+    strcpy(path, filePath);
+    strcat(path, "/");
+    strcat(path, file);
+    status = remove(path);
+
+    if(status == 0){
+        printf("Success: file deleted\n");
+    }else{
+        printf("Error: file not deleted\n");
+        printf("%s", path);
+    }
+    
 }

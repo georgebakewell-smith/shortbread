@@ -4,6 +4,7 @@
 #include "../include/input.h"
 #include "../include/tools.h"
 #include "../include/commands.h"
+#include "../include/execute.h"
 
 void listfiles(const char *dirname){
     //Opens directory
@@ -34,56 +35,28 @@ while(entity != NULL){
     closedir(dir);
 }
 
+void autorun(const char *filePath){
 
-void copyfile(const char *filePath, const char *file){
-    unsigned char buffer[1024];
-    size_t bytesRead;
-    FILE *sourceFile, *destFile;
-    //Create full filepath with filePath and target file
-    //Should probably create function for this and add to tools
-    char pathSource[100], pathDest[100];
-    strcpy(pathSource, filePath);
-    strcat(pathSource, "/");
-    strcat(pathSource, file);
-    strcpy(pathDest, "/home/george/Documents/cprojects/copiedfiles");
-    strcat(pathDest, "/");
-    strcat(pathDest, file);
-    
-    sourceFile = fopen(pathSource, "rb");
-    
-        if(sourceFile == NULL){
-                printf("Error opening source file\n");
-                
-        }else{
-            destFile = fopen(pathDest, "wb");
-        
-        if(destFile ==NULL){
-            printf("Error opening destination file");
-        }else{
-    
-            while((bytesRead = fread(buffer, 1, sizeof(buffer), sourceFile)) > 0){
-                fwrite(buffer, 1, bytesRead, destFile);
-            }
-            fclose(sourceFile);
-            fclose(destFile);
+    FILE *ruleFile;
+    char rule[100];
+    size_t nlineCount = 0;
+    leginp *pRuleCom = (leginp*)malloc(sizeof(leginp));
+
+    // Open a file in read mode
+    ruleFile = fopen("rules.txt", "r");
+    if(ruleFile == NULL) {
+        printf("Not able to open the file.\n");
+    } else{
+        printf("Successfully opened rules.txt.\n");
+    }
+
+    while(readLine(rule, ruleFile) == 0){
+    if(isLegit(rule, pRuleCom) != 1){
+            printf("Undefined command. Please try again.\n");           
         }
+    excommand(pRuleCom, filePath);
+    
     }
-}
-
-void delfile(const char *filePath, const char *file){//Maybe move this to tools
-    char path[60]; //Create a string to form the concatanated string with the filename
-    char pathTest[60];
-    int status;
-
-    strcpy(path, filePath);
-    strcat(path, "/");
-    strcat(path, file);
-    status = remove(path);
-
-    if(status == 0){
-        printf("Success: file deleted\n");
-    }else{
-        printf("Error: file not deleted\n");
-        printf("%s", path);
-    }
+    fclose(ruleFile);
+    free(pRuleCom);
 }

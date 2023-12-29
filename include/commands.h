@@ -2,7 +2,6 @@
 #define COMMANDS_H
 
 void listfiles(const char *dirname);
-void delfile(const char *filePath, const char *file);
-void copyfile(const char *filePath, const char *file);
+void autorun(const char *filePath);
 
 #endif

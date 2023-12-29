@@ -3,6 +3,7 @@
 
 # Other
 *.json
+*.txt
 
 # Filenames
 main

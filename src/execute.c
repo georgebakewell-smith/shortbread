@@ -14,6 +14,8 @@ void excommand(leginp *pLegInp, const char *filePath){
         copyfile(filePath, pLegInp->target);
     }else if(strcmp(pLegInp->command,"autorun")==0){
         autorun(filePath);
+    }else if(strcmp(pLegInp->command,"prule")==0){
+        printrules();
     }else{
         printf("Please enter a valid command");
     }

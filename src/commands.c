@@ -60,3 +60,24 @@ void autorun(const char *filePath){
     fclose(ruleFile);
     free(pRuleCom);
 }
+
+void printrules(){
+    // Prints contents of rules.txt
+    FILE *ruleFile;
+    char ch;
+    // Open a file in read mode
+    ruleFile = fopen("rules.txt", "r");
+    if(ruleFile == NULL) {
+        printf("Not able to open the file.\n");
+    } else{
+        printf("Successfully opened rules.txt.\n");
+    }
+    ch = fgetc(ruleFile);
+    while (ch != EOF){
+        
+        printf("%c", ch);
+        ch = fgetc(ruleFile);
+    }
+
+    fclose(ruleFile);
+}

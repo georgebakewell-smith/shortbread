@@ -81,3 +81,23 @@ void printrules(){
 
     fclose(ruleFile);
 }
+
+void addrule(){
+    FILE *ruleFile;
+    char ruleInput[100];
+
+    // Open a file in append mode
+    ruleFile = fopen("rules.txt", "a");
+    if(ruleFile == NULL) {
+        printf("Not able to open the file.\n");
+    } else{
+        printf("Successfully opened rules.txt.\n");
+    }
+    
+    printf("Enter rule : ");
+    fgets(ruleInput, 100, stdin);
+    newLineRemove(ruleInput);
+
+    fprintf(ruleFile, ruleInput);
+    fclose(ruleFile);
+}

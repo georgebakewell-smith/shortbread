@@ -16,7 +16,10 @@ void excommand(leginp *pLegInp, const char *filePath){
         autorun(filePath);
     }else if(strcmp(pLegInp->command,"prule")==0){
         printrules();
-    }else{
+    }else if(strcmp(pLegInp->command,"arule")==0){
+        addrule();
+    }
+    else{
         printf("Please enter a valid command");
     }
     //elseif for additional commands

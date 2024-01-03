@@ -19,7 +19,7 @@ int main(){
     newLineRemove(filePath);
     cmdprint(filePath);
     while(exit!=true){
-        leginp *pLegInp = (leginp*)malloc(sizeof(leginp));
+        LegInp *pLegInp = (LegInp*)malloc(sizeof(LegInp));
         handleInput(pLegInp, filePath);
         if(strcmp(pLegInp->command, "exit") == 0){
             free(pLegInp);

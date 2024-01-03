@@ -3,5 +3,7 @@
 
 void listfiles(const char *dirname);
 void autorun(const char *filePath);
+void printrules();
+void addrule();
 
 #endif

@@ -4,7 +4,7 @@
 #include "../include/input.h"
 #include "../include/commands.h"
 
-void excommand(leginp *pLegInp, const char *filePath){
+void excommand(LegInp *pLegInp, const char *filePath){
     
     if(strcmp(pLegInp->command,"list")==0){
         listfiles(filePath);
@@ -14,7 +14,12 @@ void excommand(leginp *pLegInp, const char *filePath){
         copyfile(filePath, pLegInp->target);
     }else if(strcmp(pLegInp->command,"autorun")==0){
         autorun(filePath);
-    }else{
+    }else if(strcmp(pLegInp->command,"prule")==0){
+        printrules();
+    }else if(strcmp(pLegInp->command,"arule")==0){
+        addrule();
+    }
+    else{
         printf("Please enter a valid command");
     }
     //elseif for additional commands

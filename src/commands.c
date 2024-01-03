@@ -40,7 +40,7 @@ void autorun(const char *filePath){
     FILE *ruleFile;
     char rule[100];
     size_t nlineCount = 0;
-    leginp *pRuleCom = (leginp*)malloc(sizeof(leginp));
+    LegInp *pRuleCom = (LegInp*)malloc(sizeof(LegInp));
 
     // Open a file in read mode
     ruleFile = fopen("rules.txt", "r");
@@ -59,4 +59,45 @@ void autorun(const char *filePath){
     }
     fclose(ruleFile);
     free(pRuleCom);
+}
+
+void printrules(){
+    // Prints contents of rules.txt
+    FILE *ruleFile;
+    char ch;
+    // Open a file in read mode
+    ruleFile = fopen("rules.txt", "r");
+    if(ruleFile == NULL) {
+        printf("Not able to open the file.\n");
+    } else{
+        printf("Successfully opened rules.txt.\n");
+    }
+    ch = fgetc(ruleFile);
+    while (ch != EOF){
+        
+        printf("%c", ch);
+        ch = fgetc(ruleFile);
+    }
+
+    fclose(ruleFile);
+}
+
+void addrule(){
+    FILE *ruleFile;
+    char ruleInput[100];
+
+    // Open a file in append mode
+    ruleFile = fopen("rules.txt", "a");
+    if(ruleFile == NULL) {
+        printf("Not able to open the file.\n");
+    } else{
+        printf("Successfully opened rules.txt.\n");
+    }
+    
+    printf("Enter rule : ");
+    fgets(ruleInput, 100, stdin);
+    newLineRemove(ruleInput);
+
+    fprintf(ruleFile, ruleInput);
+    fclose(ruleFile);
 }

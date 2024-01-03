@@ -5,10 +5,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-void newLineRemove(char *myStr);
-size_t readLine(char *rule, FILE *ruleFile);
-void cmdprint(char *myStr);
-void delfile(const char *filePath, const char *file);
-void copyfile(const char *filePath, const char *file);
+void newLineRemove(char *my_str);
+size_t readLine(char *rule, FILE *rule_file);
+void cmdprint(char *my_str);
+void delfile(const char *file_path, const char *file);
+void copyfile(const char *file_path, const char *file);
 
 #endif

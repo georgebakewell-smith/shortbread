@@ -4,9 +4,9 @@
 #include "../include/tools.h"
 
 
-size_t readLine(char *rule, FILE *ruleFile){
+size_t readLine(char *rule, FILE *rule_file){
     char line[100];
-    if(fgets(line, 100, ruleFile) != NULL){
+    if(fgets(line, 100, rule_file) != NULL){
         strcpy(rule, line);
         newLineRemove(rule);
         return 0;
@@ -17,57 +17,56 @@ size_t readLine(char *rule, FILE *ruleFile){
     }    
 }
 
-void newLineRemove(char *myStr){
-    size_t inpLen;
-    inpLen = strlen(myStr);
-        *(myStr+inpLen-1) = '\0';
+void newLineRemove(char *my_str){
+    size_t input_length;
+    input_length = strlen(my_str);
+        *(my_str+input_length-1) = '\0';
 }
 
-void cmdprint(char *myStr){
-    printf("\n%s$", myStr);
+void cmdprint(char *my_str){
+    printf("\n%s$", my_str);
 }
 
-void copyfile(const char *filePath, const char *file){
+void copyfile(const char *file_path, const char *file){
     unsigned char buffer[1024];
-    size_t bytesRead;
-    FILE *sourceFile, *destFile;
+    size_t bytes_read;
+    FILE *source_file, *dest_file;
     //Create full filepath with filePath and target file
     //Should probably create function for this and add to tools
-    char pathSource[100], pathDest[100];
-    strcpy(pathSource, filePath);
-    strcat(pathSource, "/");
-    strcat(pathSource, file);
-    strcpy(pathDest, "/home/george/Documents/cprojects/copiedfiles");
-    strcat(pathDest, "/");
-    strcat(pathDest, file);
+    char source_path[100], dest_path[100];
+    strcpy(source_path, file_path);
+    strcat(source_path, "/");
+    strcat(source_path, file);
+    strcpy(dest_path, "/home/george/Documents/cprojects/copiedfiles");
+    strcat(dest_path, "/");
+    strcat(dest_path, file);
     
-    sourceFile = fopen(pathSource, "rb");
+    source_file = fopen(source_path, "rb");
     
-        if(sourceFile == NULL){
+        if(source_file == NULL){
                 printf("Error opening source file\n");
                 
         }else{
-            destFile = fopen(pathDest, "wb");
+            dest_file = fopen(dest_path, "wb");
         
-        if(destFile ==NULL){
+        if(dest_file ==NULL){
             printf("Error opening destination file");
         }else{
     
-            while((bytesRead = fread(buffer, 1, sizeof(buffer), sourceFile)) > 0){
-                fwrite(buffer, 1, bytesRead, destFile);
+            while((bytes_read = fread(buffer, 1, sizeof(buffer), source_file)) > 0){
+                fwrite(buffer, 1, bytes_read, dest_file);
             }
-            fclose(sourceFile);
-            fclose(destFile);
+            fclose(source_file);
+            fclose(dest_file);
         }
     }
 }
 
-void delfile(const char *filePath, const char *file){//Maybe move this to tools
+void delfile(const char *file_path, const char *file){//Maybe move this to tools
     char path[100]; //Create a string to form the concatanated string with the filename
-    char pathTest[60];
     int status;
 
-    strcpy(path, filePath);
+    strcpy(path, file_path);
     strcat(path, "/");
     strcat(path, file);
     status = remove(path);

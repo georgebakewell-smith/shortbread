@@ -4,19 +4,19 @@
 #include "../include/input.h"
 #include "../include/commands.h"
 
-void excommand(LegInp *pLegInp, const char *filePath){
+void excommand(LegInp *leg_input, const char *file_path){
     
-    if(strcmp(pLegInp->command,"list")==0){
-        listfiles(filePath);
-    }else if(strcmp(pLegInp->command,"delete")==0){
-        delfile(filePath, pLegInp->target);
-    }else if(strcmp(pLegInp->command,"copy")==0){
-        copyfile(filePath, pLegInp->target);
-    }else if(strcmp(pLegInp->command,"autorun")==0){
-        autorun(filePath);
-    }else if(strcmp(pLegInp->command,"prule")==0){
+    if(strcmp(leg_input->command,"list")==0){
+        listfiles(file_path);
+    }else if(strcmp(leg_input->command,"delete")==0){
+        delfile(file_path, leg_input->target);
+    }else if(strcmp(leg_input->command,"copy")==0){
+        copyfile(file_path, leg_input->target);
+    }else if(strcmp(leg_input->command,"autorun")==0){
+        autorun(file_path);
+    }else if(strcmp(leg_input->command,"prule")==0){
         printrules();
-    }else if(strcmp(pLegInp->command,"arule")==0){
+    }else if(strcmp(leg_input->command,"arule")==0){
         addrule();
     }
     else{

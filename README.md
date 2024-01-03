@@ -8,7 +8,6 @@ It is common for directories to become clogged with unused files, or duplicates 
 * List all files in a directory
 * Autorun a set of user-specified rules for quick formatting
 ## To do
-* Update command targets so that files with same extension can be grouped
 * Provide more information when listing files
 * Improve error handling
 * Port code to be used on non-Linux systems

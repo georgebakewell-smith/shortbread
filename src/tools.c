@@ -79,3 +79,24 @@ void delfile(const char *file_path, const char *file){//Maybe move this to tools
     }
     
 }
+
+int checkExtension(const char *file_name, const char *extension){
+    // Compares a filename with a given extension
+    int index = -1;
+    
+    // Finds index of final '.' character in the file name, if any
+    for(int i = 0; i < strlen(file_name); i++){
+        if(file_name[i] == '.'){
+            index = i;
+        }
+    }
+
+    // Checks if there was a '.' and compares the extensions
+    if(index == -1){
+        printf("The file does not have an extension.\n");
+        return -1;
+    }else{
+        return strcmp(&file_name[index], extension);
+    }
+    
+}

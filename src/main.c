@@ -11,7 +11,6 @@ int main(){
     char *file_path = (char*)malloc(file_path_length*sizeof(char));
     bool exit = false;
     
-    
     printf("\nWelcome to Shortbread, your new directory cleanup tool!\n\n");
     printf("Please enter your target directory:\n");
     //fgets(file_path, file_pathLength, stdin); remove for now to save time when testing, use hardcoded line below for testing

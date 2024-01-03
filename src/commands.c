@@ -40,7 +40,7 @@ void autorun(const char *filePath){
     FILE *ruleFile;
     char rule[100];
     size_t nlineCount = 0;
-    leginp *pRuleCom = (leginp*)malloc(sizeof(leginp));
+    LegInp *pRuleCom = (LegInp*)malloc(sizeof(LegInp));
 
     // Open a file in read mode
     ruleFile = fopen("rules.txt", "r");

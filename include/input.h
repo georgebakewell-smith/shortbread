@@ -5,9 +5,9 @@ typedef struct {
     size_t numTokens;
     char command[20];
     char target[20];
-}leginp;
+}LegInp;
 
-void handleInput(leginp *pLegInp, char *filePath);
-int isLegit(char *userInput, leginp *pLegInp);
+void handleInput(LegInp *pLegInp, char *filePath);
+int isLegit(char *userInput, LegInp *pLegInp);
 
 #endif

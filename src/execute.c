@@ -4,7 +4,7 @@
 #include "../include/input.h"
 #include "../include/commands.h"
 
-void excommand(leginp *pLegInp, const char *filePath){
+void excommand(LegInp *pLegInp, const char *filePath){
     
     if(strcmp(pLegInp->command,"list")==0){
         listfiles(filePath);

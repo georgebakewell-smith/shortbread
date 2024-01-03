@@ -6,7 +6,7 @@
 
 
 
-void handleInput(leginp *pLegInp, char *filePath){
+void handleInput(LegInp *pLegInp, char *filePath){
 
     size_t inpLen = 60;
     size_t commandLen = 20;
@@ -39,7 +39,7 @@ void handleInput(leginp *pLegInp, char *filePath){
 
 
 
-int isLegit(char *userInput, leginp *pLegInp){  
+int isLegit(char *userInput, LegInp *pLegInp){  
     size_t tokenCount = 0;
 
     //Breaks input into tokens

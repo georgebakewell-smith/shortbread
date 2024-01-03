@@ -6,6 +6,14 @@
 #include "../include/commands.h"
 #include "../include/execute.h"
 
+void commandDelete(const char *file_path, const char *target){
+    if(target[0] == '*'){
+            listfiles(file_path, &target[1], 'd');
+        }else{
+            delfile(file_path, target);
+        }
+}
+
 void commandCopy(const char *file_path, const char *target, const char *dest_path){
 
     if(target[0] == '*'){
@@ -13,7 +21,6 @@ void commandCopy(const char *file_path, const char *target, const char *dest_pat
     }else{
         copyfile(file_path, target);
     }
-
 }
 
 void listfiles(const char *dir_name, const char *search_str, const char option){
@@ -33,6 +40,9 @@ void listfiles(const char *dir_name, const char *search_str, const char option){
                 printf("%s", entity->d_name);printf("\n");
             }else if(option == 'c' && checkExtension(entity->d_name, search_str) == 0){
                 copyfile(dir_name, entity->d_name);
+            }
+            else if(option == 'd' && checkExtension(entity->d_name, search_str) == 0){
+                delfile(dir_name, entity->d_name);
             }
             
             

@@ -9,7 +9,7 @@ void excommand(LegInp *leg_input, const char *file_path){
     if(strcmp(leg_input->command,"list")==0){
         listfiles(file_path, "", 'p');
     }else if(strcmp(leg_input->command,"delete")==0){
-        delfile(file_path, leg_input->target);
+        commandDelete(file_path, leg_input->target);
     }else if(strcmp(leg_input->command,"copy")==0){
         commandCopy(file_path, leg_input->target, "/home/george/Documents/cprojects/copiedfiles");
     }else if(strcmp(leg_input->command,"autorun")==0){

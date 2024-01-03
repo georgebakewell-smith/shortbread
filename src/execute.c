@@ -18,6 +18,8 @@ void excommand(LegInp *leg_input, const char *file_path){
         printrules();
     }else if(strcmp(leg_input->command,"arule")==0){
         addrule();
+    }else if(strcmp(leg_input->command,"drule")==0){
+        ruleDelete();
     }
     else{
         printf("Please enter a valid command");

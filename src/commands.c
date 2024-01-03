@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <dirent.h>
+#include <stdbool.h>
 #include "../include/input.h"
 #include "../include/tools.h"
 #include "../include/commands.h"
@@ -15,7 +16,6 @@ void commandDelete(const char *file_path, const char *target){
 }
 
 void commandCopy(const char *file_path, const char *target, const char *dest_path){
-
     if(target[0] == '*'){
         listfiles(file_path, &target[1], 'c');
     }else{
@@ -89,7 +89,8 @@ void autorun(const char *file_path){
 void printrules(){
     // Prints contents of rules.txt
     FILE *rule_file;
-    char ch;
+    char ch, line[100];
+    uint line_count = 0;
     // Open a file in read mode
     rule_file = fopen("rules.txt", "r");
     if(rule_file == NULL) {
@@ -97,11 +98,10 @@ void printrules(){
     } else{
         printf("Successfully opened rules.txt.\n");
     }
-    ch = fgetc(rule_file);
-    while (ch != EOF){
-        
-        printf("%c", ch);
-        ch = fgetc(rule_file);
+ 
+    while(fgets(line, 100, rule_file)){
+        printf("[%d] %s", line_count+1, line);
+        line_count++;
     }
 
     fclose(rule_file);
@@ -121,8 +121,68 @@ void addrule(){
     
     printf("Enter rule : ");
     fgets(rule_input, 100, stdin);
-    newLineRemove(rule_input);
+    //newLineRemove(rule_input);
 
     fprintf(rule_file, rule_input);
     fclose(rule_file);
+}
+
+void ruleDelete(){
+
+    FILE *file, *temp;
+
+    // store the filename and temp filename
+    char filename[] = "rules.txt";
+    char temp_filename[100];
+
+    // will store each line in the file, and the line to delete
+    char buffer[100];
+    int delete_line = 0;
+    
+    strcpy(temp_filename, "temp____");
+    strcat(temp_filename, filename);
+    
+    // have the user enter the line number to delete, store it into delete_line
+    printf("Delete Line : ");
+    scanf("%d", &delete_line);
+    
+    // open the original file for reading and the temp file for writing
+    file = fopen(filename, "r");
+    temp = fopen(temp_filename, "w");
+    
+    // if there was a problem opening either file let the user know what the error
+    // was and exit with a non-zero error status
+    if (file == NULL || temp == NULL)
+    {
+        printf("Error opening file(s)\n");
+    }
+    
+    // current_line will keep track of the current line number being read
+    bool keep_reading = true;
+    int current_line = 1;
+    do 
+    {
+        // stores the next line from the file into the buffer
+        fgets(buffer, 100, file);
+    
+        // if we've reached the end of the file, stop reading from the file, 
+        // otherwise so long as the current line is NOT the line we want to 
+        // delete, write it to the file
+        if (feof(file)) keep_reading = false;
+        else if (current_line != delete_line)
+        fputs(buffer, temp);
+        
+        // keeps track of the current line being read
+        current_line++;
+    
+    } while (keep_reading);
+    
+    // close our access to the files
+    fclose(file);
+    fclose(temp);
+    
+    // delete the original file, give the temp file the name of the original file
+    remove(filename);
+    rename(temp_filename, filename);
+
 }

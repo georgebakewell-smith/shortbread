@@ -7,5 +7,6 @@ void commandCopy(const char *file_path, const char *target, const char *dest_pat
 void autorun(const char *file_path);
 void printrules();
 void addrule();
+void ruleDelete();
 
 #endif

@@ -10,5 +10,6 @@ size_t readLine(char *rule, FILE *rule_file);
 void cmdprint(char *my_str);
 void delfile(const char *file_path, const char *file);
 void copyfile(const char *file_path, const char *file);
+int checkExtension(const char *file_name, const char *extension);
 
 #endif

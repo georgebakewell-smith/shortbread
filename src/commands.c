@@ -121,13 +121,12 @@ void addrule(){
     
     printf("Enter rule : ");
     fgets(rule_input, 100, stdin);
-    //newLineRemove(rule_input);
 
     fprintf(rule_file, rule_input);
     fclose(rule_file);
 }
 
-void ruleDelete(){
+void ruleAlter(const char option){
 
     FILE *file, *temp;
 
@@ -135,16 +134,19 @@ void ruleDelete(){
     char filename[] = "rules.txt";
     char temp_filename[100];
 
-    // will store each line in the file, and the line to delete
+    // will store each line in the file, and the line to select
     char buffer[100];
-    int delete_line = 0;
+    int select_line = 0;
     
     strcpy(temp_filename, "temp____");
     strcat(temp_filename, filename);
+
     
-    // have the user enter the line number to delete, store it into delete_line
-    printf("Delete Line : ");
-    scanf("%d", &delete_line);
+    
+    
+    // have the user enter the line number to alter, store it into select_line
+    printf("Enter Line : ");
+    scanf("%d", &select_line);
     
     // open the original file for reading and the temp file for writing
     file = fopen(filename, "r");
@@ -169,8 +171,16 @@ void ruleDelete(){
         // otherwise so long as the current line is NOT the line we want to 
         // delete, write it to the file
         if (feof(file)) keep_reading = false;
-        else if (current_line != delete_line)
-        fputs(buffer, temp);
+        else if (current_line != select_line){
+            fputs(buffer, temp);
+        }else if(current_line == select_line && option == 'e'){
+            char edit_line[100];
+            printf("Enter altered rule : ");
+            while ((getchar()) != '\n');
+            fgets(edit_line, 100, stdin);
+            fputs(edit_line, temp);
+        }
+        
         
         // keeps track of the current line being read
         current_line++;

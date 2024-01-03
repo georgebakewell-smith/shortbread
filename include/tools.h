@@ -7,9 +7,9 @@
 
 void newLineRemove(char *my_str);
 size_t readLine(char *rule, FILE *rule_file);
-void cmdprint(char *my_str);
-void delfile(const char *file_path, const char *file);
-void copyfile(const char *file_path, const char *file);
+void printToCMD(char *my_str);
+void fileDelete(const char *file_path, const char *file);
+void fileCopy(const char *file_path, const char *file);
 int checkExtension(const char *file_name, const char *extension);
 
 #endif

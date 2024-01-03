@@ -16,16 +16,16 @@ int main(){
     //fgets(file_path, file_pathLength, stdin); remove for now to save time when testing, use hardcoded line below for testing
     strcpy(file_path, "/home/george/Documents/cprojects/shortbreadtestfiles/");
     newLineRemove(file_path);
-    cmdprint(file_path);
+    printToCMD(file_path);
     while(exit!=true){
         LegInp *leg_input = (LegInp*)malloc(sizeof(LegInp));
-        handleInput(leg_input, file_path);
+        inputHandle(leg_input, file_path);
         if(strcmp(leg_input->command, "exit") == 0){
             free(leg_input);
             break;
         }
-        excommand(leg_input, file_path);
-        cmdprint(file_path);
+        executeCommand(leg_input, file_path);
+        printToCMD(file_path);
         free(leg_input);
         
     }

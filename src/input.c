@@ -4,9 +4,7 @@
 #include "../include/tools.h"
 #include "../include/input.h"
 
-
-
-void handleInput(LegInp *leg_input, char *file_path){
+void inputHandle(LegInp *leg_input, char *file_path){
 
     size_t input_length = 60;
     size_t command_length = 20;
@@ -25,19 +23,13 @@ void handleInput(LegInp *leg_input, char *file_path){
 
         }else{
             printf("Undefined command. Please try again.\n");
-            cmdprint(file_path);
+            printToCMD(file_path);
         }
     }while(1);
-
-    
-    
-    
     
     free(command);
     free(user_input);
 }
-
-
 
 int isLegit(char *user_input, LegInp *leg_input){  
     size_t token_count = 0;
@@ -54,14 +46,10 @@ int isLegit(char *user_input, LegInp *leg_input){
 
         //printf("%s",token);
         if(token_count==2){
-            strcpy(leg_input->target, token);
-            
-            
+            strcpy(leg_input->target, token); 
         }
 
-       
         token = strtok(NULL, delim);
-        
         
     }
     leg_input->num_tokens = token_count;

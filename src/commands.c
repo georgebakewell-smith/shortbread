@@ -9,21 +9,21 @@
 
 void commandDelete(const char *file_path, const char *target){
     if(target[0] == '*'){
-            listfiles(file_path, &target[1], 'd');
+            loopFiles(file_path, &target[1], 'd');
         }else{
-            delfile(file_path, target);
+            fileDelete(file_path, target);
         }
 }
 
 void commandCopy(const char *file_path, const char *target, const char *dest_path){
     if(target[0] == '*'){
-        listfiles(file_path, &target[1], 'c');
+        loopFiles(file_path, &target[1], 'c');
     }else{
-        copyfile(file_path, target);
+        fileCopy(file_path, target);
     }
 }
 
-void listfiles(const char *dir_name, const char *search_str, const char option){
+void loopFiles(const char *dir_name, const char *search_str, const char option){
     //Opens directory
     DIR *dir = opendir(dir_name);
     if(dir == NULL){
@@ -39,10 +39,10 @@ void listfiles(const char *dir_name, const char *search_str, const char option){
             if(option == 'p'){
                 printf("%s", entity->d_name);printf("\n");
             }else if(option == 'c' && checkExtension(entity->d_name, search_str) == 0){
-                copyfile(dir_name, entity->d_name);
+                fileCopy(dir_name, entity->d_name);
             }
             else if(option == 'd' && checkExtension(entity->d_name, search_str) == 0){
-                delfile(dir_name, entity->d_name);
+                fileDelete(dir_name, entity->d_name);
             }
             
             
@@ -53,14 +53,14 @@ void listfiles(const char *dir_name, const char *search_str, const char option){
             strcat(path, dir_name);
             strcat(path, "/");
             strcat(path, entity->d_name);
-            listfiles(path, search_str, option);
+            loopFiles(path, search_str, option);
         }   
         entity = readdir(dir);
     }
     closedir(dir);
 }
 
-void autorun(const char *file_path){
+void autoRun(const char *file_path){
 
     FILE *rule_file;
     char rule[100];
@@ -79,14 +79,14 @@ void autorun(const char *file_path){
     if(isLegit(rule, command) != 1){
             printf("Undefined command. Please try again.\n");           
         }
-    excommand(command, file_path);
+    executeCommand(command, file_path);
     
     }
     fclose(rule_file);
     free(command);
 }
 
-void printrules(){
+void rulePrint(){
     // Prints contents of rules.txt
     FILE *rule_file;
     char ch, line[100];
@@ -107,7 +107,7 @@ void printrules(){
     fclose(rule_file);
 }
 
-void addrule(){
+void ruleAdd(){
     FILE *rule_file;
     char rule_input[100];
 
@@ -141,9 +141,6 @@ void ruleAlter(const char option){
     strcpy(temp_filename, "temp____");
     strcat(temp_filename, filename);
 
-    
-    
-    
     // have the user enter the line number to alter, store it into select_line
     printf("Enter Line : ");
     scanf("%d", &select_line);
@@ -166,10 +163,7 @@ void ruleAlter(const char option){
     {
         // stores the next line from the file into the buffer
         fgets(buffer, 100, file);
-    
-        // if we've reached the end of the file, stop reading from the file, 
-        // otherwise so long as the current line is NOT the line we want to 
-        // delete, write it to the file
+  
         if (feof(file)) keep_reading = false;
         else if (current_line != select_line){
             fputs(buffer, temp);
@@ -180,7 +174,6 @@ void ruleAlter(const char option){
             fgets(edit_line, 100, stdin);
             fputs(edit_line, temp);
         }
-        
         
         // keeps track of the current line being read
         current_line++;

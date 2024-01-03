@@ -3,7 +3,6 @@
 #include <string.h>
 #include "../include/tools.h"
 
-
 size_t readLine(char *rule, FILE *rule_file){
     char line[100];
     if(fgets(line, 100, rule_file) != NULL){
@@ -23,11 +22,11 @@ void newLineRemove(char *my_str){
         *(my_str+input_length-1) = '\0';
 }
 
-void cmdprint(char *my_str){
+void printToCMD(char *my_str){
     printf("\n%s$", my_str);
 }
 
-void copyfile(const char *file_path, const char *file){
+void fileCopy(const char *file_path, const char *file){
     unsigned char buffer[1024];
     size_t bytes_read;
     FILE *source_file, *dest_file;
@@ -62,7 +61,7 @@ void copyfile(const char *file_path, const char *file){
     }
 }
 
-void delfile(const char *file_path, const char *file){//Maybe move this to tools
+void fileDelete(const char *file_path, const char *file){//Maybe move this to tools
     char path[100]; //Create a string to form the concatanated string with the filename
     int status;
 

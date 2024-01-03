@@ -6,32 +6,47 @@
 #include "../include/commands.h"
 #include "../include/execute.h"
 
-void listfiles(const char *dir_name){
+void commandCopy(const char *file_path, const char *target, const char *dest_path){
+
+    if(target[0] == '*'){
+        listfiles(file_path, &target[1], 'c');
+    }else{
+        copyfile(file_path, target);
+    }
+
+}
+
+void listfiles(const char *dir_name, const char *search_str, const char option){
     //Opens directory
     DIR *dir = opendir(dir_name);
     if(dir == NULL){
         printf("Directory not opened\n");
     }
     
-struct dirent *entity;
-entity = readdir(dir);
-//Cycles through contents
-printf("\n");
-while(entity != NULL){
-    if(entity->d_type == DT_REG){
-        printf("%s", entity->d_name);printf("\n");
-        
-    }
-    //Calls listfiles() within itself to recursively access folders within
-    if(entity->d_type == DT_DIR && strcmp(entity->d_name, ".")!=0 && strcmp(entity->d_name, "..")!=0){
-        char path[100] = {0};
-        strcat(path, dir_name);
-        strcat(path, "/");
-        strcat(path, entity->d_name);
-        listfiles(path);
-    }   
+    struct dirent *entity;
     entity = readdir(dir);
-}
+    //Cycles through contents
+    printf("\n");
+    while(entity != NULL){
+        if(entity->d_type == DT_REG){
+            if(option == 'p'){
+                printf("%s", entity->d_name);printf("\n");
+            }else if(option == 'c' && checkExtension(entity->d_name, search_str) == 0){
+                copyfile(dir_name, entity->d_name);
+            }
+            
+            
+        }
+        //Calls listfiles() within itself to recursively access folders within
+        if(entity->d_type == DT_DIR && strcmp(entity->d_name, ".")!=0 && strcmp(entity->d_name, "..")!=0){
+            char path[100] = {0};
+            strcat(path, dir_name);
+            strcat(path, "/");
+            strcat(path, entity->d_name);
+            listfiles(path, search_str, option);
+        }   
+        entity = readdir(dir);
+    }
     closedir(dir);
 }
 

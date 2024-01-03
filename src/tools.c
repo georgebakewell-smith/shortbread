@@ -84,7 +84,7 @@ int checkExtension(const char *file_name, const char *extension){
     // Compares a filename with a given extension
     int index = -1;
     
-    // Finds index of final '.' character in the file name, if any
+    // Finds index of final "." character in the file name, if any
     for(int i = 0; i < strlen(file_name); i++){
         if(file_name[i] == '.'){
             index = i;

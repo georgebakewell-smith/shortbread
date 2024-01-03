@@ -6,9 +6,9 @@
 #include "../include/commands.h"
 #include "../include/execute.h"
 
-void listfiles(const char *dirname){
+void listfiles(const char *dir_name){
     //Opens directory
-    DIR *dir = opendir(dirname);
+    DIR *dir = opendir(dir_name);
     if(dir == NULL){
         printf("Directory not opened\n");
     }
@@ -25,7 +25,7 @@ while(entity != NULL){
     //Calls listfiles() within itself to recursively access folders within
     if(entity->d_type == DT_DIR && strcmp(entity->d_name, ".")!=0 && strcmp(entity->d_name, "..")!=0){
         char path[100] = {0};
-        strcat(path, dirname);
+        strcat(path, dir_name);
         strcat(path, "/");
         strcat(path, entity->d_name);
         listfiles(path);
@@ -35,69 +35,69 @@ while(entity != NULL){
     closedir(dir);
 }
 
-void autorun(const char *filePath){
+void autorun(const char *file_path){
 
-    FILE *ruleFile;
+    FILE *rule_file;
     char rule[100];
-    size_t nlineCount = 0;
-    LegInp *pRuleCom = (LegInp*)malloc(sizeof(LegInp));
+    size_t line_count = 0;
+    LegInp *command = (LegInp*)malloc(sizeof(LegInp));
 
     // Open a file in read mode
-    ruleFile = fopen("rules.txt", "r");
-    if(ruleFile == NULL) {
+    rule_file = fopen("rules.txt", "r");
+    if(rule_file == NULL) {
         printf("Not able to open the file.\n");
     } else{
         printf("Successfully opened rules.txt.\n");
     }
 
-    while(readLine(rule, ruleFile) == 0){
-    if(isLegit(rule, pRuleCom) != 1){
+    while(readLine(rule, rule_file) == 0){
+    if(isLegit(rule, command) != 1){
             printf("Undefined command. Please try again.\n");           
         }
-    excommand(pRuleCom, filePath);
+    excommand(command, file_path);
     
     }
-    fclose(ruleFile);
-    free(pRuleCom);
+    fclose(rule_file);
+    free(command);
 }
 
 void printrules(){
     // Prints contents of rules.txt
-    FILE *ruleFile;
+    FILE *rule_file;
     char ch;
     // Open a file in read mode
-    ruleFile = fopen("rules.txt", "r");
-    if(ruleFile == NULL) {
+    rule_file = fopen("rules.txt", "r");
+    if(rule_file == NULL) {
         printf("Not able to open the file.\n");
     } else{
         printf("Successfully opened rules.txt.\n");
     }
-    ch = fgetc(ruleFile);
+    ch = fgetc(rule_file);
     while (ch != EOF){
         
         printf("%c", ch);
-        ch = fgetc(ruleFile);
+        ch = fgetc(rule_file);
     }
 
-    fclose(ruleFile);
+    fclose(rule_file);
 }
 
 void addrule(){
-    FILE *ruleFile;
-    char ruleInput[100];
+    FILE *rule_file;
+    char rule_input[100];
 
     // Open a file in append mode
-    ruleFile = fopen("rules.txt", "a");
-    if(ruleFile == NULL) {
+    rule_file = fopen("rules.txt", "a");
+    if(rule_file == NULL) {
         printf("Not able to open the file.\n");
     } else{
         printf("Successfully opened rules.txt.\n");
     }
     
     printf("Enter rule : ");
-    fgets(ruleInput, 100, stdin);
-    newLineRemove(ruleInput);
+    fgets(rule_input, 100, stdin);
+    newLineRemove(rule_input);
 
-    fprintf(ruleFile, ruleInput);
-    fclose(ruleFile);
+    fprintf(rule_file, rule_input);
+    fclose(rule_file);
 }

@@ -14,7 +14,8 @@ void commandDelete(const char *file_path, const char *target){
         }
 }
 
-void commandCopy(const char *file_path, const char *target, const char *dest_path){
+void commandCopy(const char *file_path, const char *target){
+    
     if(target[0] == '*'){
         loopFiles(file_path, &target[1], 'c');
     }else{
@@ -33,11 +34,12 @@ void autoRun(const char *file_path){
 
     FILE *rule_file;
     char rule[100];
+    char rule_filename[] = "./assets/rules.txt";
     size_t line_count = 0;
     LegInp *command = (LegInp*)malloc(sizeof(LegInp));
 
     // Open a file in read mode
-    rule_file = fopen("rules.txt", "r");
+    rule_file = fopen(rule_filename, "r");
     if(rule_file == NULL) {
         printf("Not able to open the file.\n");
     } else{
@@ -59,9 +61,10 @@ void rulePrint(){
     // Prints contents of rules.txt
     FILE *rule_file;
     char ch, line[100];
+    char rule_filename[] = "./assets/rules.txt";
     uint line_count = 0;
     // Open a file in read mode
-    rule_file = fopen("rules.txt", "r");
+    rule_file = fopen(rule_filename, "r");
     if(rule_file == NULL) {
         printf("Not able to open the file.\n");
     } else{
@@ -79,9 +82,9 @@ void rulePrint(){
 void ruleAdd(){
     FILE *rule_file;
     char rule_input[100];
-
+    char rule_filename[] = "./assets/rules.txt";
     // Open a file in append mode
-    rule_file = fopen("rules.txt", "a");
+    rule_file = fopen(rule_filename, "a");
     if(rule_file == NULL) {
         printf("Not able to open the file.\n");
     } else{
@@ -100,19 +103,22 @@ void ruleAlter(const char option){
     FILE *file, *temp;
 
     // store the filename and temp filename
-    char filename[] = "rules.txt";
-    char temp_filename[100];
+    char filename[] = "./assets/rules.txt";
+    char temp_filename[] = "./assets/temp____rules.txt";
 
     // will store each line in the file, and the line to select
     char buffer[100];
     int select_line = 0;
     
-    strcpy(temp_filename, "temp____");
-    strcat(temp_filename, filename);
+    //strcpy(temp_filename, "temp____");
+    //strcat(temp_filename, filename);
 
     // have the user enter the line number to alter, store it into select_line
     printf("Enter Line : ");
     scanf("%d", &select_line);
+    if(option == 'd'){
+        while ((getchar()) != '\n');    // Clear buffer
+    }
     
     // open the original file for reading and the temp file for writing
     file = fopen(filename, "r");
@@ -139,7 +145,7 @@ void ruleAlter(const char option){
         }else if(current_line == select_line && option == 'e'){
             char edit_line[100];
             printf("Enter altered rule : ");
-            while ((getchar()) != '\n');
+            while ((getchar()) != '\n');    // Clear buffer
             fgets(edit_line, 100, stdin);
             fputs(edit_line, temp);
         }
@@ -148,7 +154,7 @@ void ruleAlter(const char option){
         current_line++;
     
     } while (keep_reading);
-    
+
     // close our access to the files
     fclose(file);
     fclose(temp);
@@ -156,5 +162,4 @@ void ruleAlter(const char option){
     // delete the original file, give the temp file the name of the original file
     remove(filename);
     rename(temp_filename, filename);
-
 }

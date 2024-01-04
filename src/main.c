@@ -14,8 +14,8 @@ int main(){
 
     printf("\nWelcome to Shortbread, your new directory cleanup tool!\n\n");
     printf("Please enter your target directory:\n");
-    fgets(file_path, file_path_length, stdin); //remove for now to save time when testing, use hardcoded line below for testing
-    //strcpy(file_path, "/home/george/Documents/cprojects/shortbreadtestfiles/");
+    //fgets(file_path, file_path_length, stdin); //remove for now to save time when testing, use hardcoded line below for testing
+    strcpy(file_path, "/home/george/Documents/cprojects/shortbreadtestfiles/");
     newLineRemove(file_path);
     printToCMD(file_path);
     while(exit!=true){

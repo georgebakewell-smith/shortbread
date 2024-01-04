@@ -30,14 +30,25 @@ void printToCMD(char *my_str){
 void fileCopy(const char *file_path, const char *file){
     unsigned char buffer[1024];
     size_t bytes_read;
-    FILE *source_file, *dest_file;
+    FILE *source_file, *dest_file, *dest_path_file;
+    char dest_path[FILEPATH_LENGTH], source_path[FILEPATH_LENGTH];
+    char dest_path_filename[] = "./assets/destination_filepath.txt";   
+    dest_path_file = fopen(dest_path_filename, "r");
+    
+    if(dest_path_file != NULL){
+        
+        fgets(dest_path, FILEPATH_LENGTH, dest_path_file);
+        newLineRemove(dest_path);
+        fclose(dest_path_file);
+        
+    }else{
+        printf("Error opening location of destination file address.\n");
+    }
+
     //Create full filepath with filePath and target file
-    //Should probably create function for this and add to tools
-    char source_path[100], dest_path[100];
     strcpy(source_path, file_path);
     strcat(source_path, "/");
     strcat(source_path, file);
-    strcpy(dest_path, "/home/george/Documents/cprojects/copiedfiles");
     strcat(dest_path, "/");
     strcat(dest_path, file);
     

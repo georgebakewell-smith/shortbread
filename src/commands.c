@@ -33,7 +33,6 @@ void loopFiles(const char *dir_name, const char *search_str, const char option){
     struct dirent *entity;
     entity = readdir(dir);
     //Cycles through contents
-    printf("\n");
     while(entity != NULL){
         if(entity->d_type == DT_REG){
             if(option == 'p'){
@@ -49,6 +48,16 @@ void loopFiles(const char *dir_name, const char *search_str, const char option){
         }
         //Calls listfiles() within itself to recursively access folders within
         if(entity->d_type == DT_DIR && strcmp(entity->d_name, ".")!=0 && strcmp(entity->d_name, "..")!=0){
+            if(option == 'p'){
+                printf("----%s----", entity->d_name);printf("\n");
+            }
+            else if(option == 'c' && checkExtension(entity->d_name, search_str) == 0){
+                fileCopy(dir_name, entity->d_name);
+            }
+            else if(option == 'd' && checkExtension(entity->d_name, search_str) == 0){
+                fileDelete(dir_name, entity->d_name);
+            }
+            
             char path[100] = {0};
             strcat(path, dir_name);
             strcat(path, "/");

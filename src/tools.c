@@ -49,12 +49,13 @@ void fileCopy(const char *file_path, const char *file){
             dest_file = fopen(dest_path, "wb");
         
         if(dest_file ==NULL){
-            printf("Error opening destination file");
+            printf("Error opening destination file\n");
         }else{
     
             while((bytes_read = fread(buffer, 1, sizeof(buffer), source_file)) > 0){
                 fwrite(buffer, 1, bytes_read, dest_file);
             }
+            printf("Success: file '%s' copied\n", file);
             fclose(source_file);
             fclose(dest_file);
         }
@@ -71,7 +72,7 @@ void fileDelete(const char *file_path, const char *file){//Maybe move this to to
     status = remove(path);
 
     if(status == 0){
-        printf("Success: file deleted\n");
+        printf("Success: file '%s' deleted\n", file);
     }else{
         printf("Error: file not deleted\n");
         printf("%s", path);
@@ -92,7 +93,6 @@ int checkExtension(const char *file_name, const char *extension){
 
     // Checks if there was a '.' and compares the extensions
     if(index == -1){
-        printf("The file does not have an extension.\n");
         return -1;
     }else{
         return strcmp(&file_name[index], extension);

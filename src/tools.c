@@ -64,7 +64,7 @@ void fileCopy(const char *file_path, const char *file){
 }
 
 void fileDelete(const char *file_path, const char *file){//Maybe move this to tools
-    char path[100]; //Create a string to form the concatanated string with the filename
+    char path[FILEPATH_LENGTH]; //Create a string to form the concatanated string with the filename
     int status;
 
     strcpy(path, file_path);
@@ -138,7 +138,7 @@ void recursiveLoop(const char *dir_name, const char *search_str, const char opti
                 fileDelete(dir_name, entity->d_name);
             }
             
-            char path[100] = {0};
+            char path[FILEPATH_LENGTH] = {0};
             strcat(path, dir_name);
             strcat(path, "/");
             strcat(path, entity->d_name);

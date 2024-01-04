@@ -7,14 +7,15 @@
 
 int main(){
 
-    const unsigned int file_path_length = 100;
+    const unsigned int file_path_length = FILEPATH_LENGTH;
     char *file_path = (char*)malloc(file_path_length*sizeof(char));
     bool exit = false;
-    
+    int myint = FILEPATH_LENGTH;
+
     printf("\nWelcome to Shortbread, your new directory cleanup tool!\n\n");
     printf("Please enter your target directory:\n");
-    //fgets(file_path, file_path_length, stdin); //remove for now to save time when testing, use hardcoded line below for testing
-    strcpy(file_path, "/home/george/Documents/cprojects/shortbreadtestfiles/");
+    fgets(file_path, file_path_length, stdin); //remove for now to save time when testing, use hardcoded line below for testing
+    //strcpy(file_path, "/home/george/Documents/cprojects/shortbreadtestfiles/");
     newLineRemove(file_path);
     printToCMD(file_path);
     while(exit!=true){
@@ -29,8 +30,6 @@ int main(){
         free(leg_input);
         
     }
-    
-
     
     free(file_path);
     

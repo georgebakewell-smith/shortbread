@@ -8,6 +8,7 @@ It is common for directories to become clogged with unused files, or duplicates 
 * List all files in a directory
 * Autorun a set of user-specified rules for quick formatting
 ## To do
+* Add a resources directory for rules.txt, and also a saved filepath for copied files to be backed up to
 * Provide more information when listing files
 * Improve error handling
 * Port code to be used on non-Linux systems

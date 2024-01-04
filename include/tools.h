@@ -1,5 +1,6 @@
 #ifndef TOOLS_H
 #define TOOLS_H
+#define FILEPATH_LENGTH 1000
 
 #include <stdio.h>
 #include <stdlib.h>

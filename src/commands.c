@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <dirent.h>
 #include <stdbool.h>
 #include "../include/input.h"
 #include "../include/tools.h"
@@ -24,49 +23,10 @@ void commandCopy(const char *file_path, const char *target, const char *dest_pat
 }
 
 void loopFiles(const char *dir_name, const char *search_str, const char option){
-    //Opens directory
-    DIR *dir = opendir(dir_name);
-    if(dir == NULL){
-        printf("Directory not opened\n");
-    }
-    
-    struct dirent *entity;
-    entity = readdir(dir);
-    //Cycles through contents
-    while(entity != NULL){
-        if(entity->d_type == DT_REG){
-            if(option == 'p'){
-                printf("%s", entity->d_name);printf("\n");
-            }else if(option == 'c' && checkExtension(entity->d_name, search_str) == 0){
-                fileCopy(dir_name, entity->d_name);
-            }
-            else if(option == 'd' && checkExtension(entity->d_name, search_str) == 0){
-                fileDelete(dir_name, entity->d_name);
-            }
-            
-            
-        }
-        //Calls listfiles() within itself to recursively access folders within
-        if(entity->d_type == DT_DIR && strcmp(entity->d_name, ".")!=0 && strcmp(entity->d_name, "..")!=0){
-            if(option == 'p'){
-                printf("----%s----", entity->d_name);printf("\n");
-            }
-            else if(option == 'c' && checkExtension(entity->d_name, search_str) == 0){
-                fileCopy(dir_name, entity->d_name);
-            }
-            else if(option == 'd' && checkExtension(entity->d_name, search_str) == 0){
-                fileDelete(dir_name, entity->d_name);
-            }
-            
-            char path[100] = {0};
-            strcat(path, dir_name);
-            strcat(path, "/");
-            strcat(path, entity->d_name);
-            loopFiles(path, search_str, option);
-        }   
-        entity = readdir(dir);
-    }
-    closedir(dir);
+    uint *layer_depth = (uint*)malloc(sizeof(uint));
+    *layer_depth = 0;
+    recursiveLoop(dir_name, search_str, option, layer_depth);
+    free(layer_depth);
 }
 
 void autoRun(const char *file_path){

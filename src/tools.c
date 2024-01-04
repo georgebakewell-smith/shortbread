@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <dirent.h>
 #include "../include/tools.h"
 
 size_t readLine(char *rule, FILE *rule_file){
@@ -97,5 +98,56 @@ int checkExtension(const char *file_name, const char *extension){
     }else{
         return strcmp(&file_name[index], extension);
     }
+    
+}
+
+void recursiveLoop(const char *dir_name, const char *search_str, const char option, uint *layer_depth){
+    //Opens directory
+    DIR *dir = opendir(dir_name);
+    if(dir == NULL){
+        printf("Directory not opened\n");
+    }
+    
+    struct dirent *entity;
+    entity = readdir(dir);
+    //Cycles through contents
+    while(entity != NULL){
+        if(entity->d_type == DT_REG){
+            if(option == 'p'){
+                for(int i = 0; i < *layer_depth; i++){printf("\t");}
+                printf("%s", entity->d_name);printf("\n");
+            }else if(option == 'c' && checkExtension(entity->d_name, search_str) == 0){
+                fileCopy(dir_name, entity->d_name);
+            }
+            else if(option == 'd' && checkExtension(entity->d_name, search_str) == 0){
+                fileDelete(dir_name, entity->d_name);
+            }
+            
+            
+        }
+        //Calls listfiles() within itself to recursively access folders within
+        if(entity->d_type == DT_DIR && strcmp(entity->d_name, ".")!=0 && strcmp(entity->d_name, "..")!=0){
+            if(option == 'p'){
+                for(int i = 0; i < *layer_depth; i++){printf("\t");}
+                printf("----%s----", entity->d_name);printf("\n");
+            }
+            else if(option == 'c' && checkExtension(entity->d_name, search_str) == 0){
+                fileCopy(dir_name, entity->d_name);
+            }
+            else if(option == 'd' && checkExtension(entity->d_name, search_str) == 0){
+                fileDelete(dir_name, entity->d_name);
+            }
+            
+            char path[100] = {0};
+            strcat(path, dir_name);
+            strcat(path, "/");
+            strcat(path, entity->d_name);
+            *layer_depth = *layer_depth + 1;
+            recursiveLoop(path, search_str, option, layer_depth);
+            *layer_depth = *layer_depth - 1;
+        }   
+        entity = readdir(dir);
+    }
+    closedir(dir);
     
 }

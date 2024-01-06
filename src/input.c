@@ -5,6 +5,7 @@
 #include "../include/input.h"
 
 void inputHandle(LegInp *leg_input, char *file_path){
+    // Asks for user input and calls validating function, asks for new command if invalid
 
     size_t input_length = 60;
     size_t command_length = 20;
@@ -31,20 +32,21 @@ void inputHandle(LegInp *leg_input, char *file_path){
     free(user_input);
 }
 
-int isLegit(char *user_input, LegInp *leg_input){  
+int isLegit(char *user_input, LegInp *leg_input){
+    // Validates an input from the user
     size_t token_count = 0;
 
     //Breaks input into tokens
     char delim[] = " ";
     char* token = strtok(user_input, delim);
     
+    // Cycles through each token and place in structure
     while (token != NULL) {
         ++token_count;
         if(token_count==1){           
             strcpy(leg_input->command, token);           
         }
 
-        //printf("%s",token);
         if(token_count==2){
             strcpy(leg_input->target, token); 
         }

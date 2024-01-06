@@ -5,6 +5,7 @@
 #include "../include/commands.h"
 
 void executeCommand(LegInp *leg_input, const char *file_path){
+    // Takes a validated input and executes appropriate function
     
     if(strcmp(leg_input->command,"list")==0){
         loopFiles(file_path, "", 'p');

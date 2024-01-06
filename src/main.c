@@ -14,19 +14,32 @@ int main(){
     FILE *rule_file, *destination_path_file;
 
     // Initialise rules.txt and destination_path.txt
-    rule_file = fopen("./assets/rules.txt", "w");
-    destination_path_file = fopen("./assets/destination_filepath.txt", "w");
-    if(rule_file != NULL){
+    // Opens in read first to check existence, creates new if file doesn't exist
+    rule_file = fopen("./assets/rules.txt", "r");
+    destination_path_file = fopen("./assets/destination_filepath.txt", "r");
+    if(rule_file == NULL){
+        rule_file = fopen("./assets/rules.txt", "w");
+        
+        if(rule_file != NULL){
+            fclose(rule_file);
+        }else{
+            printf("Error Creating or opening rules.txt, Shortbread will not work.\n");
+        }
+    }else{
         fclose(rule_file);
-    }else{
-        printf("Error Creating or opening rules.txt, Shortbread will not work.\n");
     }
-    if(destination_path_file != NULL){
-        fclose(destination_path_file);
+    if(destination_path_file == NULL){
+        destination_path_file = fopen("./assets/destination_filepath.txt", "w");
+        if(destination_path_file != NULL)
+        {
+            fclose(destination_path_file);
+        }else{
+            printf("Error Creating or opening destination_filepath.txt, Shortbread will not work.\n");
+        }
     }else{
-        printf("Error Creating or opening destination_filepath.txt, Shortbread will not work.\n");
-    }    
-
+        fclose(destination_path_file);
+    }
+    // Welcome screen 
     printf("\nWelcome to Shortbread, your new directory cleanup tool!\n\n");
     printf("Please enter your target directory:\n");
     fgets(file_path, file_path_length, stdin);    

@@ -11,11 +11,25 @@ int main(){
     char *file_path = (char*)malloc(file_path_length*sizeof(char));
     bool exit = false;
     int myint = FILEPATH_LENGTH;
+    FILE *rule_file, *destination_path_file;
+
+    // Initialise rules.txt and destination_path.txt
+    rule_file = fopen("./assets/rules.txt", "w");
+    destination_path_file = fopen("./assets/destination_filepath.txt", "w");
+    if(rule_file != NULL){
+        fclose(rule_file);
+    }else{
+        printf("Error Creating or opening rules.txt, Shortbread will not work.\n");
+    }
+    if(destination_path_file != NULL){
+        fclose(destination_path_file);
+    }else{
+        printf("Error Creating or opening destination_filepath.txt, Shortbread will not work.\n");
+    }    
 
     printf("\nWelcome to Shortbread, your new directory cleanup tool!\n\n");
     printf("Please enter your target directory:\n");
-    // fgets(file_path, file_path_length, stdin); //remove for now to save time when testing, use hardcoded line below for testing
-    strcpy(file_path, "/home/george/Documents/cprojects/shortbreadtestfiles/");
+    fgets(file_path, file_path_length, stdin);    
     newLineRemove(file_path);
     printToCMD(file_path);
 

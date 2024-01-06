@@ -187,7 +187,6 @@ void cDirAlter(const char option){
             // Fetches input filepath from user and replaces that in the file
             printf("Please enter the filepath of the directory you would like files to be copied to : \n");
             fgets(dest_path, FILEPATH_LENGTH, stdin);
-            newLineRemove(dest_path);
             fputs(dest_path, dest_path_file);
         }
     fclose(dest_path_file);

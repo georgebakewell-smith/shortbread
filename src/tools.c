@@ -58,7 +58,7 @@ void fileCopy(const char *file_path, const char *file){
     strcat(source_path, file);
     strcat(dest_path, "/");
     strcat(dest_path, file);
-    
+
     source_file = fopen(source_path, "rb");
     
         if(source_file == NULL){

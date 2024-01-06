@@ -23,9 +23,13 @@ void executeCommand(LegInp *leg_input, const char *file_path){
         ruleAlter('d');
     }else if(strcmp(leg_input->command,"erule")==0){
         ruleAlter('e');
+    }else if(strcmp(leg_input->command,"pcdir")==0){
+        cDirAlter('p');
+    }else if(strcmp(leg_input->command,"ecdir")==0){
+        cDirAlter('e');
     }
     else{
-        printf("Please enter a valid command");
+        printf("\nPlease enter a valid command");
     }
     //elseif for additional commands
 }

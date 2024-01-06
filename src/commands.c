@@ -163,3 +163,26 @@ void ruleAlter(const char option){
     remove(filename);
     rename(temp_filename, filename);
 }
+
+void cDirAlter(const char option){
+    FILE *dest_path_file;
+    char dest_path_filename[] = "./assets/destination_filepath.txt";
+    char dest_path[FILEPATH_LENGTH];
+
+    dest_path_file = fopen(dest_path_filename, "r+");
+    if(dest_path_file != NULL){
+        if(option == 'p'){
+            fgets(dest_path, FILEPATH_LENGTH, dest_path_file);
+            printf("%s", dest_path);
+        }else if(option == 'e'){
+            printf("Please enter the filepath of the directory you would like files to be copied to : \n");
+            fgets(dest_path, FILEPATH_LENGTH, stdin);
+            newLineRemove(dest_path);
+            fputs(dest_path, dest_path_file);
+        }
+    fclose(dest_path_file);
+        
+    }else{
+        printf("Unable to open file containing copy address.");
+    }
+}

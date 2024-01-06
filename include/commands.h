@@ -9,5 +9,6 @@ void autoRun(const char *file_path);
 void rulePrint();
 void ruleAdd();
 void ruleAlter(const char option);
+void cDirAlter(const char option);
 
 #endif

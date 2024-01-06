@@ -22,7 +22,7 @@ void inputHandle(LegInp *leg_input, char *file_path){
             break;
 
         }else{
-            printf("Undefined command. Please try again.\n");
+            printf("\nUndefined command. Please try again.\n");
             printToCMD(file_path);
         }
     }while(1);

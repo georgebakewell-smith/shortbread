@@ -4,16 +4,33 @@
 #include "../include/input.h"
 #include "../include/commands.h"
 
-void excommand(leginp *pLegInp, char *filePath){
+void executeCommand(LegInp *leg_input, const char *file_path){
+    // Takes a validated input and executes appropriate function
     
-    if(strcmp(pLegInp->command,"list")==0){
-        listfiles(filePath);
-    }else if(strcmp(pLegInp->command,"delete")==0){
-        delfile(filePath, pLegInp->target);
-    }else if(strcmp(pLegInp->command,"copy")==0){
-        copyfile(filePath, pLegInp->target);
-    }else{
-        printf("Please enter a valid command");
+    if(strcmp(leg_input->command,"list")==0){
+        loopFiles(file_path, "", 'p');
+    }else if(strcmp(leg_input->command,"delete")==0){
+        commandDelete(file_path, leg_input->target);
+    }else if(strcmp(leg_input->command,"copy")==0){
+        commandCopy(file_path, leg_input->target);
+    }else if(strcmp(leg_input->command,"autorun")==0){
+        autoRun(file_path);
+    }else if(strcmp(leg_input->command,"prule")==0){
+        rulePrint();
+    }else if(strcmp(leg_input->command,"arule")==0){
+        ruleAdd();
+    }else if(strcmp(leg_input->command,"drule")==0){
+        printf("delete rule\n");
+        ruleAlter('d');
+    }else if(strcmp(leg_input->command,"erule")==0){
+        ruleAlter('e');
+    }else if(strcmp(leg_input->command,"pcdir")==0){
+        cDirAlter('p');
+    }else if(strcmp(leg_input->command,"ecdir")==0){
+        cDirAlter('e');
+    }
+    else{
+        printf("\nPlease enter a valid command");
     }
     //elseif for additional commands
 }

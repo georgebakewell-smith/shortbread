@@ -2,11 +2,12 @@
 #define INPUT_H
 
 typedef struct {
-    size_t numTokens;
+    size_t num_tokens;
     char command[20];
     char target[20];
-}leginp;
+}LegInp;
 
-void handleInput(leginp *pLegInp, char *filePath);
+void inputHandle(LegInp *leg_input, char *file_path);
+int isLegit(char *user_input, LegInp *leg_input);
 
 #endif

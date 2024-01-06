@@ -3,6 +3,6 @@
 
 #include "../include/input.h"
 
-void excommand(leginp *pLegInp, char *filePath);
+void executeCommand(LegInp *leg_input, const char *file_path);
 
 #endif

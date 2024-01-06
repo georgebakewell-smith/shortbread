@@ -1,8 +1,14 @@
 #ifndef COMMANDS_H
 #define COMMANDS_H
 
-void listfiles(const char *dirname);
-void delfile(const char *filePath, const char *file);
-void copyfile(const char *filePath, const char *file);
+
+void commandDelete(const char *file_path, const char *target);
+void commandCopy(const char *file_path, const char *target);
+void loopFiles(const char *dir_name, const char *search_str, const char option);
+void autoRun(const char *file_path);
+void rulePrint();
+void ruleAdd();
+void ruleAlter(const char option);
+void cDirAlter(const char option);
 
 #endif

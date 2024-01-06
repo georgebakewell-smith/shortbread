@@ -4,70 +4,60 @@
 #include "../include/tools.h"
 #include "../include/input.h"
 
-int isLegit(char *userInput, leginp *pLegInp);
+void inputHandle(LegInp *leg_input, char *file_path){
+    // Asks for user input and calls validating function, asks for new command if invalid
 
-void handleInput(leginp *pLegInp, char *filePath){
-
-    size_t inpLen = 60;
-    size_t commandLen = 20;
-    char *userInput = (char*)malloc(inpLen*sizeof(char));
-    char *command = (char*)malloc(commandLen*sizeof(char));
+    size_t input_length = 60;
+    size_t command_length = 20;
+    char *user_input = (char*)malloc(input_length*sizeof(char));
+    char *command = (char*)malloc(command_length*sizeof(char));
     
     do{
         //Takes user input
-        fgets(userInput, inpLen, stdin);  
-        newLineRemove(userInput);
+        fgets(user_input, input_length, stdin);  
+        newLineRemove(user_input);
 
         //Checks command is legitimate
-        if(isLegit(userInput, pLegInp)){
+        if(isLegit(user_input, leg_input)){
             
             break;
 
         }else{
-            printf("Undefined command. Please try again.\n");
-            cmdprint(filePath);
+            printf("\nUndefined command. Please try again.\n");
+            printToCMD(file_path);
         }
     }while(1);
-
-    
-    
-    
     
     free(command);
-    free(userInput);
+    free(user_input);
 }
 
-
-
-int isLegit(char *userInput, leginp *pLegInp){  
-    size_t tokenCount = 0;
+int isLegit(char *user_input, LegInp *leg_input){
+    // Validates an input from the user
+    size_t token_count = 0;
 
     //Breaks input into tokens
     char delim[] = " ";
-    char* token = strtok(userInput, delim);
+    char* token = strtok(user_input, delim);
     
+    // Cycles through each token and place in structure
     while (token != NULL) {
-        ++tokenCount;
-        if(tokenCount==1){           
-            strcpy(pLegInp->command, token);           
+        ++token_count;
+        if(token_count==1){           
+            strcpy(leg_input->command, token);           
         }
 
-        //printf("%s",token);
-        if(tokenCount==2){
-            strcpy(pLegInp->target, token);
-            
-            
+        if(token_count==2){
+            strcpy(leg_input->target, token); 
         }
 
-       
         token = strtok(NULL, delim);
         
-        
     }
-    pLegInp->numTokens = tokenCount;
+    leg_input->num_tokens = token_count;
 
     //Checks if less than 2 tokens
-    if(tokenCount <= 2){     
+    if(token_count <= 2){     
         return 1;
     }else{
         return 0;

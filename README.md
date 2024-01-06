@@ -7,6 +7,15 @@ It is common for directories to become clogged with unused files, or duplicates 
 * Delete unwanted files
 * List all files in a directory
 * Autorun a set of user-specified rules for quick formatting
+## Requirements
+* Linux based operating system with GCC
+* Make
+## Installation
+* Download latest version of 'main' branch from https://github.com/georgebakewell-smith/shortbread/tree/main
+* Copy to desired program location
+* Make sure your system has the requirements listed above
+* In the terminal, navigate to the program directory and type 'Make'
+* To run, type bin/shortbread whilst still in the program directory
 ## To do
 * Provide more information when listing files
 * Improve error handling

@@ -120,7 +120,7 @@ int checkExtension(const char *file_name, const char *extension){
     if(index == -1){
         return -1;
     }else{
-        return strcmp(&file_name[index], extension);
+        return strcmp(file_name + index, extension);
     }
     
 }

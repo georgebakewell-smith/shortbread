@@ -13,8 +13,10 @@ int main(){
     int myint = FILEPATH_LENGTH;
     FILE *rule_file, *destination_path_file;
 
-    // Initialise rules.txt and destination_path.txt
-    // Opens in read first to check existence, creates new if file doesn't exist
+    /*
+     *Initialise rules.txt and destination_path.txt
+     *Opens in read first to check existence, creates new if file doesn't exist
+     */
     rule_file = fopen("./assets/rules.txt", "r");
     destination_path_file = fopen("./assets/destination_filepath.txt", "r");
     if(rule_file == NULL){
@@ -39,14 +41,14 @@ int main(){
     }else{
         fclose(destination_path_file);
     }
-    // Welcome screen 
+    /* Welcome screen */
     printf("\nWelcome to Shortbread, your new directory cleanup tool!\n\n");
     printf("Please enter your target directory:\n");
     fgets(file_path, file_path_length, stdin);    
     newLineRemove(file_path);
     printToCMD(file_path);
 
-    // Create input pointer, handle and validate, execute then print file_path to command line
+    /* Create input pointer, handle and validate, execute then print file_path to command line */
     while(exit!=true){
         LegInp *leg_input = (LegInp*)malloc(sizeof(LegInp));
         inputHandle(leg_input, file_path);

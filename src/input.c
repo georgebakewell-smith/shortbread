@@ -5,7 +5,7 @@
 #include "../include/input.h"
 
 void inputHandle(LegInp *leg_input, char *file_path){
-    // Asks for user input and calls validating function, asks for new command if invalid
+    /* Asks for user input and calls validating function, asks for new command if invalid */
 
     size_t input_length = 60;
     size_t command_length = 20;
@@ -13,11 +13,11 @@ void inputHandle(LegInp *leg_input, char *file_path){
     char *command = (char*)malloc(command_length*sizeof(char));
     
     do{
-        //Takes user input
+        /* Takes user input */
         fgets(user_input, input_length, stdin);  
         newLineRemove(user_input);
 
-        //Checks command is legitimate
+        /* Checks command is legitimate */
         if(isLegit(user_input, leg_input)){
             
             break;
@@ -33,14 +33,14 @@ void inputHandle(LegInp *leg_input, char *file_path){
 }
 
 int isLegit(char *user_input, LegInp *leg_input){
-    // Validates an input from the user
+    /* Validates an input from the user */
     size_t token_count = 0;
 
-    //Breaks input into tokens
+    /* Breaks input into tokens */
     char delim[] = " ";
     char* token = strtok(user_input, delim);
     
-    // Cycles through each token and place in structure
+    /* Cycles through each token and place in structure*/
     while (token != NULL) {
         ++token_count;
         if(token_count==1){           
@@ -56,7 +56,7 @@ int isLegit(char *user_input, LegInp *leg_input){
     }
     leg_input->num_tokens = token_count;
 
-    //Checks if less than 2 tokens
+    /* Checks if less than 2 tokens */
     if(token_count <= 2){     
         return 1;
     }else{

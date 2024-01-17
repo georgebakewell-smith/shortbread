@@ -5,7 +5,7 @@
 #include "../include/commands.h"
 
 void executeCommand(LegInp *leg_input, const char *file_path){
-    // Takes a validated input and executes appropriate function
+    /* Takes a validated input and executes appropriate function */
     
     if(strcmp(leg_input->command,"list")==0){
         loopFiles(file_path, "", 'p');
@@ -32,5 +32,5 @@ void executeCommand(LegInp *leg_input, const char *file_path){
     else{
         printf("\nPlease enter a valid command");
     }
-    //elseif for additional commands
+    /* elseif for additional commands */
 }

@@ -14,7 +14,7 @@ size_t readLine(char *rule, FILE *rule_file){
         newLineRemove(rule);
         return 0;
     }   else{
-        // End of file
+        /* End of file */
         return 1;
     }    
 }

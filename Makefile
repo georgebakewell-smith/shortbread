@@ -19,4 +19,4 @@ $(OBJ)/%.o: $(SRC)/%.c
 
 
 clean:
-	rm -f bin/* $(OBJ)/*
+	rm -f $(BINDIR)/* $(OBJ)/*
